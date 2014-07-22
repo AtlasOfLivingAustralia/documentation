@@ -20,6 +20,7 @@ We welcome direct contribution to this documentation project. Please announce yo
 
 ####Principles####
 We maintain documentation mainly by using the wiki. To clone the wiki repo, you do:
+
     $ git clone https://github.com/AtlasOfLivingAustralia/documentation.wiki.git
 
 If you happened to any problems, or have any questions and suggestions, please feel free to file an issue here. Thanks!
