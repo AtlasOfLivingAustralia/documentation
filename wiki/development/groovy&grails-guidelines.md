@@ -33,9 +33,11 @@ grails.resources.adhoc.patterns = ['/js/*', '/images/*', '/css/*', '/plugins/*',
 grails.resources.adhoc.includes = ['/js/**', '/images/**', '/css/**','/plugins/**', '/vendor/**']
 ```
 
-* It helps to keep the version number of your libraries in the containing folder if they come with it as part of their file name (eg: jquery-2.0.1.js). Or you can just create a folder with the version number you are using. Eg:
+* Don't remove the plain (not minified) version of your web/js library. Those are the ones that should be declared in your Resources file as they enable the app to be debuged and they will get minified and gzipped in PROD thanks to the resources plugin declaration above <a href="#Web_static_resources_(Resource_Plugin)"><i class="fa fa-arrow-up"></i></a>
+
+* It helps to keep the version number of your libraries in the containing folder if they don't come with it as part of their file name (eg: jquery-2.0.1.js vs bootbox.js). Or you can just create a folder with the version number you are using. Eg:
 ```
-/vendor/jquery-2.0.1/jquery.js
+/vendor/bootbox-4.4.0/bootbox.js
 ```
 or
 ```
@@ -45,7 +47,7 @@ or
 * Default Grails `/web-app/js` and `/web-app/css` folders are better used for resources that have been just developed exclusively for its host application.
 
 * Resources that are declared inside a plugin need to specify the plugin name as part of the URL building process. Eg:
-```
+```groovy
 modules = {
     ...
     bootstrap {
