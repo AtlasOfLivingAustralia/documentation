@@ -8,6 +8,46 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline :-)
 
 ### Logging
+* ALA logging recommended configuration in Config.groovy:
+```groovy
+    def loggingDir = (System.getProperty('catalina.base') ? System.getProperty('catalina.base') + '/logs' : './logs')
+    if(!(new File(loggingDir).exists())){
+        loggingDir = "/tmp"
+    }
+    
+    // log4j configuration    
+    log4j = {
+        appenders {
+            environments {
+                production {
+                    rollingFile name: "tomcatLog", maxFileSize: '1MB', file: "${loggingDir}/${appName}.log", threshold: org.apache.log4j.Level.ERROR, layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n")
+                }
+                development {
+                    console name: "stdout", layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n"), threshold: org.apache.log4j.Level.DEBUG
+                }
+                test {
+                    rollingFile name: "tomcatLog", maxFileSize: '1MB', file: "/tmp/${appName}", threshold: org.apache.log4j.Level.DEBUG, layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n")
+                }
+            }
+        }
+        root {
+        // change the root logger to my tomcatLog file
+            error 'tomcatLog'
+            warn 'tomcatLog'
+            additivity = true
+        }
+    
+        error   'au.org.ala.cas.client',
+                'grails.spring.BeanBuilder',
+                'grails.plugin.webxml',
+                'grails.plugin.cache.web.filter',
+                'grails.app.services.org.grails.plugin.resource',
+                'grails.app.taglib.org.grails.plugin.resource',
+                'grails.app.resourceMappers.org.grails.plugin.resource'
+    
+        debug   'grails.app'
+    }
+```
 
 ### Web static resources (Resource Plugin)
 * For Grails version 2.3+ (not 3.x), these are the recommended Resources plugin dependencies:
