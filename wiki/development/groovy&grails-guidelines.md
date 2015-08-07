@@ -5,7 +5,7 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 ## Best Practices and Tips
 
 ### General
-Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline <i class="fa fa-thumbs-up"></i>
+* Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline <i class="fa fa-thumbs-up"></i>
 
 * Don't check-in commented lines into your SCM. If you want to know what was there before, that is what SCM version history is for.
 
