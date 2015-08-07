@@ -7,6 +7,8 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 ### General
 Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline <i class="fa fa-thumbs-up"></i>
 
+* Don't check-in commented lines into your SCM. If you want to know what was there before, that is what SCM version history is for.
+
 ### BuildConfig.groovy
 * For all Grails projects using version 2.x+, it is recommended to set the targeted compilation level to 1.7+. **By using 1.6 you would be introducing an unnecessary performance penalty to your app**. Just make sure you have this in your `BuildConfig.groovy`:
 ```groovy
