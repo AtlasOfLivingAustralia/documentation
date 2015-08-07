@@ -2,10 +2,10 @@
 
 This guideline is meant to be a compilation of best practices, tips and gotchas.
 
-## Best Practices
+## Best Practices and Tips
 
 ### General
-Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline :-)
+Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline <i class="fa fa-thumbs-up"></i>
 
 ### BuildConfig.groovy
 * For all Grails projects using version 2.x+, it is recommended to set the targeted compilation level to 1.7+. **By using 1.6 you would be introducing an unnecessary performance penalty to your app**. Just make sure you have this in your `BuildConfig.groovy`:
@@ -69,14 +69,40 @@ modules = {
     bootstrap {
         dependsOn 'core'
         resource url: [ dir:'js', file: 'bootstrap.min.js', plugin:'ala-bootstrap3']
-        resource url: [ dir:'css', file: 'bootstrap.min.css', plugin:'ala-bootstrap3'], attrs:[media:'screen, projection, print']
+        resource url: [ dir:'css', file: 'bootstrap.min.css', plugin:'ala-bootstrap3']
     }
     ...
 }
 ```
 
 ### External configuration
-
+* We use `.properties` file for external config instead of `.groovy` due to CAS limitation.
+* External config is usually located in the system folder: `/data/<app-name>/config/<app-name>.properties`
+* External config is digested **after** processing the `Config.groovy` file. That means code like this inside it is useless:
+```
+/******************************************************************************\
+ *  EXTERNAL SERVERS
+ \******************************************************************************/
+if (!biocache.baseURL) {
+    biocache.baseURL = "http://biocache.ala.org.au/"
+}
+if (!ala.baseURL) {
+    ala.baseURL = "http://www.ala.org.au"
+}
+if (!headerAndFooter.baseURL) {
+    headerAndFooter.baseURL = "http://www2.ala.org.au/commonui"
+}
+```
+* In any case, all external services url references should be in the external config file.
+* By default all external services url references should not have a trailing forward slash at the end. So we should have this:
+```groovy
+biocache.baseURL = "http://biocache.ala.org.au"
+```
+as opposed to this:
+```groovy
+biocache.baseURL = "http://biocache.ala.org.au/"
+```
+* REST services endpoints partial path references (without the host.) eg: `/ws/intersect/` should be in a `Constants.groovy` file instead of the external config file.
 
 ### Logging
 * ALA logging recommended configuration in Config.groovy (not sure about this one actually):
@@ -128,3 +154,9 @@ modules = {
 * Grails 2.5.x do not run in non-forked mode in any of the existing IntellijIDEA releases to date (14.1.4 at the time of writing). It is been fixed for next release. More details [here](https://youtrack.jetbrains.com/issue/IDEA-138537).
 
 ## ALA shared plugins
+There is a set of Grails plugins that are reused among our projects:
+
+* __[ala-bootstrap3](https://github.com/AtlasOfLivingAustralia/ala-bootstrap3)__: provides a basic set of web resources to correctly apply the new 2015 ALA web theme based on bootstrap 3.4.x
+* __[ala-bootstrap2](https://github.com/AtlasOfLivingAustralia/ala-bootstrap2)__: provides a basic set of web resources for the old ALA web theme based on bootstrap 2.3.x
+* __[ala-auth](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin)__: ALA authentication/authorization plugin interface to CAS.
+* __[ala-ws-security](https://github.com/AtlasOfLivingAustralia/ala-ws-security-plugin)__: Web service specific security code, e.g. API Key filters
