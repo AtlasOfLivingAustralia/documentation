@@ -7,6 +7,24 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 ### General
 Let's put [this guide](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/) as the baseline :-)
 
+### BuildConfig.groovy
+* For all Grails projects using version 2.x+, it is recommended to set the targeted compilation level to 1.7+. **By using 1.6 you would be introducing an unnecessary performance penalty to your app**. Just make sure you have this in your `BuildConfig.groovy`:
+```groovy
+grails.project.target.level = 1.7
+grails.project.source.level = 1.7
+```
+<i class="fa fa-exclamation-triangle"></i> Note that you should be using a JDK 1.7.0_60 or bigger to avoid issues. More information [here](http://www.groovy-lang.org/indy.html).
+
+* Since Grails 2.3+ **class auto-reloading is not enabled by default**. There are two options to enable it:
+  1. Use the following option when running the app:
+  ```bash
+  grails run-app -reloading
+  ```
+  2. Add the following line to your `BuildConfig.groovy`:
+  ```groovy
+  grails.reload.enabled = true
+  ```
+
 ### Web static resources (Resource Plugin)
 * For Grails version 2.3+ (not 3.x), these are the recommended Resources plugin dependencies:
 ```groovy
@@ -31,7 +49,7 @@ grails.resources.adhoc.patterns = ['/js/*', '/images/*', '/css/*', '/plugins/*',
 grails.resources.adhoc.includes = ['/js/**', '/images/**', '/css/**','/plugins/**', '/vendor/**']
 ```
 
-* Don't remove the plain (not minified) version of your web/js library. Those are the ones that should be declared in your Resources file as they enable the app to be debuged and they will get minified and gzipped in PROD thanks to the resources plugin declaration above <a href="#Web_static_resources_(Resource_Plugin)"><i class="fa fa-arrow-up"></i></a>
+* Don't remove the plain (not minified) version from your web library. Those are the ones that should be declared in your Resources file as they enable debugging and they will get minified and gzipped in PROD thanks to the resources plugin declaration above <a href="#Web_static_resources_(Resource_Plugin)"><i class="fa fa-arrow-up"></i></a>
 
 * It helps to keep the version number of your libraries in the containing folder if they don't come with it as part of their file name (eg: jquery-2.0.1.js vs bootbox.js). Or you can just create a folder with the version number you are using. Eg:
 ```
@@ -39,7 +57,7 @@ grails.resources.adhoc.includes = ['/js/**', '/images/**', '/css/**','/plugins/*
 ```
 or
 ```
-/vendor/jquery/2.0.1/jquery.js
+/vendor/bootbox/4.4.0/bootbox.js
 ```
 
 * Default Grails `/web-app/js` and `/web-app/css` folders are better used for resources that have been just developed exclusively for its host application.
@@ -57,15 +75,18 @@ modules = {
 }
 ```
 
+### External configuration
+
+
 ### Logging
-* ALA logging recommended configuration in Config.groovy:
+* ALA logging recommended configuration in Config.groovy (not sure about this one actually):
 ```groovy
     def loggingDir = (System.getProperty('catalina.base') ? System.getProperty('catalina.base') + '/logs' : './logs')
     if(!(new File(loggingDir).exists())){
         loggingDir = "/tmp"
     }
-    
-    // log4j configuration    
+
+    // log4j configuration
     log4j = {
         appenders {
             environments {
@@ -86,7 +107,7 @@ modules = {
             warn 'tomcatLog'
             additivity = true
         }
-    
+
         error   'au.org.ala.cas.client',
                 'grails.spring.BeanBuilder',
                 'grails.plugin.webxml',
@@ -94,7 +115,7 @@ modules = {
                 'grails.app.services.org.grails.plugin.resource',
                 'grails.app.taglib.org.grails.plugin.resource',
                 'grails.app.resourceMappers.org.grails.plugin.resource'
-    
+
         debug   'grails.app'
     }
 ```
@@ -103,7 +124,7 @@ modules = {
 * Grails JSON null values parsing issue: All versions of Grails until 2.5.1 and 3.0.4 have a problem in the way the `grails.converters.JSON` parses `null` values. You can find the workaround for older versions of Grails [here](TODO)
 
 ## Version specific gotchas
-* Grails 2.4.4 has a [critical bug] regarding the Hibernate flushing mechanism. It is recommended to move to at least 2.4.5
-* Grails 2.5.x do not run in non-forked mode in any of the existing IntellijIDEA releases to date (14.1.4 at the time of writing. It is been fixed for next release. More details [here](https://youtrack.jetbrains.com/issue/IDEA-138537).
+* Grails 2.4.4 has a [critical bug](https://jira.grails.org/browse/GRAILS-11687) regarding the Hibernate flushing mechanism. Given that many of our apps use this version, it is recommended to move them to at least 2.4.5
+* Grails 2.5.x do not run in non-forked mode in any of the existing IntellijIDEA releases to date (14.1.4 at the time of writing). It is been fixed for next release. More details [here](https://youtrack.jetbrains.com/issue/IDEA-138537).
 
 ## ALA shared plugins
