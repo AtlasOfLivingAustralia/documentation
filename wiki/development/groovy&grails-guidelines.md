@@ -149,6 +149,8 @@ biocache.baseURL = "http://biocache.ala.org.au/"
 ```
 
 ### Other
+* Several ALA projects have a service called `WebService` or WebserviceService` as means to create a custom REST client. It is recommended to use one of the existing ones instead of trying to reinvent the wheel. I'd recommend using the Groovy HTTPBuilder client: https://github.com/jgritman/httpbuilder
+
 * Grails JSON null values parsing issue: All versions of Grails until 2.5.1 and 3.0.4 have a problem in the way the `grails.converters.JSON` parses `null` values. You can find the workaround for older versions of Grails [here](TODO)
 
 ## Version specific gotchas
