@@ -32,14 +32,14 @@ grails.project.dependency.resolver = "maven"
 ```
 * By default we should use the ALA Nexus repository to resolve all the dependecies:
 ```
-grails.project.dependency.resolution = {
-  ...
-  repositories {
-      mavenLocal()
-      mavenRepo "http://nexus.ala.org.au/content/groups/public/"
+  grails.project.dependency.resolution = {
+    ...
+    repositories {
+        mavenLocal()
+        mavenRepo "http://nexus.ala.org.au/content/groups/public/"
+    }
+    ...
   }
-  ...
-}
 ```
 
 ### Web static resources (Resource Plugin)
