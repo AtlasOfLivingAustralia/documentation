@@ -26,6 +26,21 @@ grails.project.source.level = 1.7
   ```groovy
   grails.reload.enabled = true
   ```
+* For Grails version 2.3+ (not 3.x), dependency management has to be done using Aether (Maven). Just add this if you don't already have it:
+```
+grails.project.dependency.resolver = "maven"
+```
+* By default we should use the ALA Nexus repository to resolve all the dependecies:
+```
+grails.project.dependency.resolution = {
+  ...
+  repositories {
+      mavenLocal()
+      mavenRepo "http://nexus.ala.org.au/content/groups/public/"
+  }
+  ...
+}
+```
 
 ### Web static resources (Resource Plugin)
 * For Grails version 2.3+ (not 3.x), these are the recommended Resources plugin dependencies:
