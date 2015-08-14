@@ -163,6 +163,24 @@ biocache.baseURL = "http://biocache.ala.org.au/"
     }
 ```
 
+### Simple asychronous methods in Grails
+
+1. Add the following to resources.groovy:
+```
+    // required for @Async annotation support
+    xmlns task:"http://www.springframework.org/schema/task"
+    task.'annotation-driven'('proxy-target-class':true, 'mode':'proxy')
+```
+2. Annotate the method you want to make asynchronour with ```@Async``` (import org.springframework.scheduling.annotation.Async)
+
+GOTCHA:
+By default, the RequestAttributes thread local used by Grails/Spring is not inheritable, so new threads will not have access to the request context when calling web services. This line works around this issue by resetting the request attributes with the inheritable flag set to true, meaning spawned threads will inherit the state.
+Add this to the controller before the asynchronous method call:
+```
+    RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true)
+```
+
+
 ### Other
 * Several ALA projects have a service called `WebService` or WebserviceService` as means to create a custom REST client. It is recommended to use one of the existing ones instead of trying to reinvent the wheel. I'd recommend using the Groovy HTTPBuilder client: https://github.com/jgritman/httpbuilder
 
@@ -180,19 +198,3 @@ There is a set of Grails plugins that are reused among our projects:
 * __[ala-auth](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin)__: ALA authentication/authorization plugin interface to CAS.
 * __[ala-ws-security](https://github.com/AtlasOfLivingAustralia/ala-ws-security-plugin)__: Web service specific security code, e.g. API Key filters
 
-### Simple asychronous methods in Grails
-
-1. Add the following to resources.groovy:
-```
-    // required for @Async annotation support
-    xmlns task:"http://www.springframework.org/schema/task"
-    task.'annotation-driven'('proxy-target-class':true, 'mode':'proxy')
-```
-2. Annotate the method you want to make asynchronour with ```@Async``` (import org.springframework.scheduling.annotation.Async)
-
-GOTCHA:
-By default, the RequestAttributes thread local used by Grails/Spring is not inheritable, so new threads will not have access to the request context when calling web services. This line works around this issue by resetting the request attributes with the inheritable flag set to true, meaning spawned threads will inherit the state.
-Add this to the controller before the asynchronous method call:
-```
-    RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true)
-```
