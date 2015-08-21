@@ -190,7 +190,7 @@ biocache.baseURL = "http://biocache.ala.org.au/"
 ```
 2. Annotate the method you want to make asynchronour with ```@Async``` (import org.springframework.scheduling.annotation.Async)
 
-* <i class="fa fa-exclamation-triangle"></i> GOTCHA:
+<i class="fa fa-exclamation-triangle"></i> GOTCHA:
 By default, the RequestAttributes thread local used by Grails/Spring is not inheritable, so new threads will not have access to the request context when calling web services. This line works around this issue by resetting the request attributes with the inheritable flag set to true, meaning spawned threads will inherit the state.
 Add this to the controller before the asynchronous method call:
 ```groovy
