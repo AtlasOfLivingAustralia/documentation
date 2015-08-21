@@ -1,6 +1,23 @@
 # Groovy and Grails guidelines
 
 This guideline is meant to be a compilation of best practices, tips and gotchas.
+## Detailed TOC
+(Using [Atom markdown-toc plugin](https://atom.io/packages/markdown-toc))
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Groovy and Grails guidelines](#groovy-and-grails-guidelines)
+	- [Detailed TOC](#detailed-toc)
+	- [Best Practices and Tips](#best-practices-and-tips)
+		- [General](#general)
+		- [BuildConfig.groovy](#buildconfiggroovy)
+		- [Web static resources (Resource Plugin)](#web-static-resources-resource-plugin)
+		- [External configuration](#external-configuration)
+		- [Logging](#logging)
+		- [Simple asychronous methods in Grails](#simple-asychronous-methods-in-grails)
+		- [Other](#other)
+	- [Version specific gotchas](#version-specific-gotchas)
+	- [ALA shared plugins](#ala-shared-plugins)
+<!-- /TOC -->
 
 ## Best Practices and Tips
 
@@ -197,4 +214,3 @@ There is a set of Grails plugins that are reused among our projects:
 * __[ala-bootstrap2](https://github.com/AtlasOfLivingAustralia/ala-bootstrap2)__: provides a basic set of web resources for the old ALA web theme based on bootstrap 2.3.x
 * __[ala-auth](https://github.com/AtlasOfLivingAustralia/ala-auth-plugin)__: ALA authentication/authorization plugin interface to CAS.
 * __[ala-ws-security](https://github.com/AtlasOfLivingAustralia/ala-ws-security-plugin)__: Web service specific security code, e.g. API Key filters
-
