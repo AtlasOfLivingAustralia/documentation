@@ -113,7 +113,7 @@ modules = {
 * We use `.properties` file for external config instead of `.groovy` due to CAS limitation.
 * External config is usually located in the system folder: `/data/<app-name>/config/<app-name>.properties`
 * External config is digested **after** processing the `Config.groovy` file. That means code like this inside it is useless:
-```
+```groovy
 /******************************************************************************\
  *  EXTERNAL SERVERS
  \******************************************************************************/
@@ -183,17 +183,17 @@ biocache.baseURL = "http://biocache.ala.org.au/"
 ### Simple asychronous methods in Grails
 
 1. Add the following to resources.groovy:
-```
+```groovy
     // required for @Async annotation support
     xmlns task:"http://www.springframework.org/schema/task"
     task.'annotation-driven'('proxy-target-class':true, 'mode':'proxy')
 ```
 2. Annotate the method you want to make asynchronour with ```@Async``` (import org.springframework.scheduling.annotation.Async)
 
-GOTCHA:
+* <i class="fa fa-exclamation-triangle"></i> GOTCHA:
 By default, the RequestAttributes thread local used by Grails/Spring is not inheritable, so new threads will not have access to the request context when calling web services. This line works around this issue by resetting the request attributes with the inheritable flag set to true, meaning spawned threads will inherit the state.
 Add this to the controller before the asynchronous method call:
-```
+```groovy
     RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true)
 ```
 
