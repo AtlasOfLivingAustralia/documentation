@@ -5,10 +5,12 @@
 1. Do not mix languages in a single file:
   1. Do not generate large amounts of JS in Groovy
   1. Do not dump large amounts of JS in .gsps
-  1. Do not put CSS styles in .gsps
+  1. Do not put large amounts of HTML inline in JS files
+  1. Do not put CSS styles in .gsps (that also means do not use inline styles (```style="..."```))
   1. Javascript belongs in .js files
-  1. HTML belongs in .thml or .gsp files
+  1. HTML belongs in .html or .gsp files
   1. CSS belongs in .css files
+1. Defer loading of javascript to the end
 1. Format your code consistently - this makes it easier to read and therefore easier to maintain
 1. Take advantage of IntelliJ's code inspections: the right-hand margin of the editor will highlight potential bugs or maintenance issues with a little line. Your goal should be to have 0 warnings...much of our code looks like a barcode.
 1. Structure your code cleanly:
@@ -19,14 +21,15 @@
   1. Consistent design makes code easier to extend and integrate
   1. Consistent languages/frameworks makes code easier to pick up when moving onto a different product
   1. Consistent implementation makes code easier to maintain
-  1. Consistent structure (i.e. classes, methods, packages etc) makes it easier to maintain and extend
-  1. Consistent testing makes it easier (and safer) to refactor and extend
-1. Self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
-  1. Good structure (single purpose methods etc).
+  1. Consistent structure (i.e. classes, methods, packages etc) makes code easier to maintain and extend
+  1. Consistent testing makes code easier (and safer) to refactor and extend
+1. Code should be self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
+  1. Good structure (single purpose methods etc)
   1. Good naming conventions (NO SINGLE CHARACTER VARIABLES (except integer counters in loops))
   1. Clear and concise code (just because you can put everything on a single line doesn't mean you should)
-  1. Use types where they are known - this helps explain what the code does by saying what types it expects/returns (it also helps the IDE provide code insight and autocomplete)
-1. DO NOT CHECK IN COMMENTED OR DEAD (unused) CODE!
+  1. Use types where they are known - this helps explain what the code does by saying what types it expects/returns (it also helps the IDE provide code insight and autocompletion)
+1. Do not check in commented or dead code (unused)!
+1. Do not copy & paste code! Refactor it into a reusable form.
 
 ## Code Style
 
@@ -50,7 +53,10 @@ Mixing languages confuses IntelliJ, and leads to bittle and difficult to test co
 
 Remember: _Code reviews are an invitation for a conversation, NOT a criticism_.
 
+This gives a good starting point: [Grails and Groovy Code Review Guidelines](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/)
+
 Code reviews are extremely important as they provide a number of benefits to the team and to the resulting product:
+
 1. Team members are exposed to parts of the system that they are not directly working on by reviewing the work of team mates
 1. Team members can learn new ways of doing things from reviewing the work of team mates
 1. Team members can suggest better/cleaner/different ways of doing things when they review a team mate's work
@@ -58,6 +64,7 @@ Code reviews are extremely important as they provide a number of benefits to the
   1. Code reviews are not just about style - you should mentally step through the code as if you were debugging it: look for bugs!
 1. The end product is more likely to have consistent code if it being reviewed by the whole team - consistent in terms of formatting, but also in terms of implementation: e.g. I implement security via an annotation and filter, but I notice during a review that Bob used inline if statements....have a chat, agree on one approach or the other, and make the implementation consistent
 1. Bugs will be found earlier - i.e. before they go to production
+
 
 ### What should you do in a code review?
 
