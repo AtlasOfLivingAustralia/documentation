@@ -20,7 +20,7 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 <!-- /TOC -->
 
 ## Code Reviews
-[See Code Style and Review Guidelines](./codeReviews.md)
+[See Code Style and Review Guidelines](codeReviews.md)
 
 ## Best Practices and Tips
 
