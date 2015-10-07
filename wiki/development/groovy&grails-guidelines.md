@@ -1,26 +1,24 @@
 # Groovy and Grails guidelines
 
 This guideline is meant to be a compilation of best practices, tips and gotchas.
+
+This guide assumes you have already seen the "[Code Style and Review Guidelines](codeReviews.md)"
+
 ## Detailed TOC
 (Using [Atom markdown-toc plugin](https://atom.io/packages/markdown-toc))
-<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Groovy and Grails guidelines](#groovy-and-grails-guidelines)
-	- [Detailed TOC](#detailed-toc)
-	- [Best Practices and Tips](#best-practices-and-tips)
-		- [General](#general)
-		- [BuildConfig.groovy](#buildconfiggroovy)
-		- [Web static resources (Resource Plugin)](#web-static-resources-resource-plugin)
-		- [External configuration](#external-configuration)
+- [Groovy and Grails guidelines](#)
+	- [Detailed TOC](#Detailed_TOC)
+	- [Best Practices and Tips](#Best_practices_and_Tips)
+		- [General](#General)
+		- [BuildConfig.groovy](#BuildConfig.groovy)
+		- [Web static resources - Resource Plugin](#Web_static_resources_-_Resource_Plugin)
+		- [External configuration](#External_configuration)
 		- [Logging](#logging)
-		- [Simple asychronous methods in Grails](#simple-asychronous-methods-in-grails)
+		- [Simple asychronous methods in Grails](#Simple_asychronous_methods_in_grails)
 		- [Other](#other)
-	- [Version specific gotchas](#version-specific-gotchas)
-	- [ALA shared plugins](#ala-shared-plugins)
-<!-- /TOC -->
-
-## Code Reviews
-[See Code Style and Review Guidelines](codeReviews.md)
+	- [Version specific gotchas](#Version_specific_gotchas)
+	- [ALA shared plugins](#ALA_shared_plugins)
 
 ## Best Practices and Tips
 
@@ -62,7 +60,7 @@ grails.project.dependency.resolver = "maven"
   }
 ```
 
-### Web static resources (Resource Plugin)
+### Web static resources - Resource Plugin
 * For Grails version 2.3+ (not 3.x), these are the recommended Resources plugin dependencies:
 ```groovy
     runtime ':resources:1.2.14'
@@ -183,7 +181,11 @@ biocache.baseURL = "http://biocache.ala.org.au/"
     }
 ```
 
-### Simple asychronous methods in Grails
+### Simple asynchronous methods in Grails
+#### Using Grails native Async programming support
+You can find more info in this link -> http://grails.github.io/grails-doc/2.5.x/guide/async.html
+
+#### If you want to use Spring @Async annotation
 
 1. Add the following to resources.groovy:
 ```groovy
@@ -202,7 +204,6 @@ Add this to the controller before the asynchronous method call:
 ```groovy
     RequestContextHolder.setRequestAttributes(RequestContextHolder.getRequestAttributes(), true)
 ```
-
 
 ### Other
 * Several ALA projects have a service called `WebService` or WebserviceService` as means to create a custom REST client. It is recommended to use one of the existing ones instead of trying to reinvent the wheel. I'd recommend using the Groovy HTTPBuilder client: https://github.com/jgritman/httpbuilder
