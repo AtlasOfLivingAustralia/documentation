@@ -19,6 +19,9 @@ This guideline is meant to be a compilation of best practices, tips and gotchas.
 	- [ALA shared plugins](#ala-shared-plugins)
 <!-- /TOC -->
 
+## Code Reviews
+[See Code Style and Review Guidelines](./codeReviews.md)
+
 ## Best Practices and Tips
 
 ### General
@@ -188,7 +191,7 @@ biocache.baseURL = "http://biocache.ala.org.au/"
     xmlns task:"http://www.springframework.org/schema/task"
     task.'annotation-driven'('proxy-target-class':true, 'mode':'proxy')
 ```
-2. Annotate the method you want to make asynchronour with `@Async` 
+2. Annotate the method you want to make asynchronour with `@Async`
 ```groovy
 import org.springframework.scheduling.annotation.Async
 ```
