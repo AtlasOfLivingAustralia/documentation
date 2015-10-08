@@ -10,12 +10,6 @@
   1. Javascript belongs in .js files
   1. HTML belongs in .html or .gsp files
   1. CSS belongs in .css files
-1. Defer loading of javascript to the end
-1. Format your code consistently - this makes it easier to read and therefore easier to maintain
-1. Take advantage of IntelliJ's code inspections: the right-hand margin of the editor will highlight potential bugs or maintenance issues with a little line. Your goal should be to have 0 warnings...much of our code looks like a barcode.
-1. Structure your code cleanly:
-  1. Separation of concerns - group code into classes/files based on the behaviour or purpose of that code
-  1. Methods perform a single purpose - lots of small single-purpose methods are easier to test (and read) than one method that does multiple things
 1. _Consistency is king_:
   1. Consistent formatting makes code easier to read
   1. Consistent design makes code easier to extend and integrate
@@ -23,6 +17,13 @@
   1. Consistent implementation makes code easier to maintain
   1. Consistent structure (i.e. classes, methods, packages etc) makes code easier to maintain and extend
   1. Consistent testing makes code easier (and safer) to refactor and extend
+1. Defer loading of javascript to the end
+1. Format your code consistently - this makes it easier to read and therefore easier to maintain
+1. Take advantage of IntelliJ's code inspections: the right-hand margin of the editor will highlight potential bugs or maintenance issues with a little line. Your goal should be to have 0 warnings...much of our code looks like a barcode.
+1. Structure your code cleanly:
+  1. Separation of concerns - group code into classes/files based on the behaviour or purpose of that code
+  1. Methods perform a single purpose - lots of small single-purpose methods are easier to test (and read) than one method that does multiple things
+  1. Methods should be small: at the very most they should not exceed 1 screen of text, but ideally should be less than 20 or so lines. This keeps them succinct and focussed on a particular task.
 1. Code should be self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
   1. Good structure (single purpose methods etc)
   1. Good naming conventions (NO SINGLE CHARACTER VARIABLES (except integer counters in loops))
@@ -30,6 +31,11 @@
   1. Use types where they are known - this helps explain what the code does by saying what types it expects/returns (it also helps the IDE provide code insight and autocompletion)
 1. Do not check in commented or dead code (unused)!
 1. Do not copy & paste code! Refactor it into a reusable form.
+1. Do not include implementation details in names - i.e. do not call methods "ajaxSomething" because it may not always be used via ajax; do not call a variable "googleMap" because the implementation might change to another provider (e.g. Leaflet).
+1. When using Leaflet or Google maps, do not assume that the map container will always have a fixed id of "map" - this would limit you to 1 map per page.
+  1. NEVER assign the map to a global variable: ```window.alaMap = map``` is WRONG.
+  1. You are tying the hands of anyone who comes along later and wants/needs to use more than 1 map per page.
+1. Do not use global variables - scope your code properly.
 
 ## Code Style
 
@@ -47,7 +53,7 @@ Ctrl + Alt + L
 ```
 for Windows.
 
-Mixing languages confuses IntelliJ, and leads to bittle and difficult to test code. Don't do it.
+Mixing languages confuses IntelliJ, and leads to brittle and difficult to test code. Don't do it.
 
 ## Code Reviews
 
