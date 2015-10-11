@@ -2,6 +2,8 @@
 
 ## General guidelines
 
+*Rule #1: Always think about the poor sods who will come along after you and maintain your code - be nice, make their job as easy as possible.*
+
 1. Do not mix languages in a single file:
   1. Do not generate large amounts of JS in Groovy
   1. Do not dump large amounts of JS in .gsps
@@ -17,13 +19,13 @@
   1. Consistent implementation makes code easier to maintain
   1. Consistent structure (i.e. classes, methods, packages etc) makes code easier to maintain and extend
   1. Consistent testing makes code easier (and safer) to refactor and extend
-1. Defer loading of javascript to the end
 1. Format your code consistently - this makes it easier to read and therefore easier to maintain
 1. Take advantage of IntelliJ's code inspections: the right-hand margin of the editor will highlight potential bugs or maintenance issues with a little line. Your goal should be to have 0 warnings...much of our code looks like a barcode.
 1. Structure your code cleanly:
   1. Separation of concerns - group code into classes/files based on the behaviour or purpose of that code
   1. Methods perform a single purpose - lots of small single-purpose methods are easier to test (and read) than one method that does multiple things
   1. Methods should be small: at the very most they should not exceed 1 screen of text, but ideally should be less than 20 or so lines. This keeps them succinct and focussed on a particular task.
+  1. Methods should have 1 return at the end to improve readability. An exception to this rule would be trivial exit conditions, where you check for a basic precondition at the start of the method and return immediately if the precondition is not met.
 1. Code should be self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
   1. Good structure (single purpose methods etc)
   1. Good naming conventions (NO SINGLE CHARACTER VARIABLES (except integer counters in loops))
@@ -32,10 +34,18 @@
 1. Do not check in commented or dead code (unused)!
 1. Do not copy & paste code! Refactor it into a reusable form.
 1. Do not include implementation details in names - i.e. do not call methods "ajaxSomething" because it may not always be used via ajax; do not call a variable "googleMap" because the implementation might change to another provider (e.g. Leaflet).
+1. Remember: just because the language lets you do something doesn't mean you should.
+1. 1. Get a general understanding of basic accessibility requirements, and apply them to your UI code.
+
+### Javascript guidelines
+
+1. Defer loading of javascript to the end
 1. When using Leaflet or Google maps, do not assume that the map container will always have a fixed id of "map" - this would limit you to 1 map per page.
   1. NEVER assign the map to a global variable: ```window.alaMap = map``` is WRONG.
   1. You are tying the hands of anyone who comes along later and wants/needs to use more than 1 map per page.
-1. Do not use global variables - scope your code properly.
+1. Do not use global variables/functions - scope your code properly.
+1. Add ```"use strict";``` to the start of all Javascript files (see http://www.w3schools.com/js/js_strict.asp)
+1. Use ```var self = this; ... self.foo = "bar";``` instead of ``` this.foo = "bar"``` to ensure that your bindings are consistent when functions are passed as/assigned to variables.
 
 ## Code Style
 
