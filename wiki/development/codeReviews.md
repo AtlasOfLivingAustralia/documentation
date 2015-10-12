@@ -1,8 +1,12 @@
 # Code Style and Review guidelines
 
-## General guidelines
-
 *Rule #1: Always think about the poor sods who will come along after you and maintain your code - be nice, make their job as easy as possible.*
+
+*Rule #2: Be consistent - to a large extent, it doesn't matter _how_ something is done as long as everything is consistent.*
+
+*Rule #3: All code should be reviewed by at least one other developer, and all changes should be tested by someone other than the author.*
+
+## General guidelines
 
 1. Do not mix languages in a single file:
   1. Do not generate large amounts of JS in Groovy
@@ -35,7 +39,9 @@
 1. Do not copy & paste code! Refactor it into a reusable form.
 1. Do not include implementation details in names - i.e. do not call methods "ajaxSomething" because it may not always be used via ajax; do not call a variable "googleMap" because the implementation might change to another provider (e.g. Leaflet).
 1. Remember: just because the language lets you do something doesn't mean you should.
-1. 1. Get a general understanding of basic accessibility requirements, and apply them to your UI code.
+1. Get a general understanding of basic accessibility requirements, and apply them to your UI code.
+1. Never, ever, hardcode environment specific variables. Use externalised properties.
+  1. This means never put URLs into the code: we write open source software than we want other countries to adopt - they don't want to point to ALA!
 
 ### Javascript guidelines
 
@@ -67,7 +73,7 @@ Mixing languages confuses IntelliJ, and leads to brittle and difficult to test c
 
 ## Code Reviews
 
-Remember: _Code reviews are an invitation for a conversation, NOT a criticism_.
+Remember: _Code reviews are an invitation for a conversation, NOT a criticism_. Treat them as a learning opportunity for both parties. Try to keep egos on a leash.
 
 This gives a good starting point: [Grails and Groovy Code Review Guidelines](https://tedvinke.wordpress.com/2015/03/15/basic-groovy-and-grails-code-review-guidelines/)
 
@@ -91,7 +97,7 @@ Code reviews are extremely important as they provide a number of benefits to the
   1. are methods short and concise, performing just a single function?
   1. does the code follow separation of concerns guidelines?
   1. Are different languages isolated from each other so as to be more easily tested
-    1. Are related areas clearly associated with each other (i.e. is it easy to identify which .js file contains the script for a paricular block of html?)
+    1. Are related areas clearly associated with each other (i.e. is it easy to identify which .js file contains the script for a particular block of html?)
 1. Review the naming conventions in use - do all classes/methods/variables have accurately descriptive names?
 1. Is there any commented or dead (unused) code? This should be removed
 1. Step through the code as if you were debugging it, trying to spot potential bugs. E.g.
@@ -101,9 +107,23 @@ Code reviews are extremely important as they provide a number of benefits to the
   1. is the code efficient?
   1. how are exceptions handled?
   1. are the correct html attributes being used (e.g. title, not alt, to get a tooltip on a link)?
+  1. Are environment specific values like URLs hardcoded?
 1. Review the unit tests
   1. Do they exist? Should they?
   1. Do they sufficiently cover the code being tested?
   1. Do they test boundary conditions?
   1. Have existing tests been updated to reflect the code change?
 1. For a large change, check out the branch and run it, doing some basic spot checks.
+1. Don't only focus on negatives: if you see a nice bit of code, or something you didn't know how to do, say so! Code reviews are an opportunity for the reviewer to learn, too.
+
+
+### How should you respond to a code review?
+
+1. Remember that reviews are an invitation for a conversation, not an attack on your work
+1. If you disagree with a comment, reply to it explaining why
+  1. If the reviewer comes back again, go and have a talk with them to come to an agreement rather than bouncing comments back and forth, the summarise the agreement in a final comment
+1. When you read a comment, remember that it might apply to more than just the point where the comment was made. It is your responsibility to apply the change to all relevant locations.
+  1. For example, a comment saying to use types when known rather than defining everything with 'def' might be made against 1 variable in one class: it is your responsibility to apply the change to ALL of your code, not just that one variable.
+1. Respond to all comments so the reviewer knows you have looked at it:
+  1. Write 'done' if you apply the suggested change
+  1. Explain your reasons if you decide not to apply the change
