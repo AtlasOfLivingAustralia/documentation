@@ -31,11 +31,18 @@ NOTE: These are guidelines - there will be exceptions, but try to follow them wh
   1. Methods perform a single purpose - lots of small single-purpose methods are easier to test (and read) than one method that does multiple things
   1. Methods should be small: at the very most they should not exceed 1 screen of text, but ideally should be less than 20 or so lines. This keeps them succinct and focussed on a particular task.
   1. Methods should have 1 return at the end to improve readability. An exception to this rule would be trivial exit conditions, where you check for a basic precondition at the start of the method and return immediately if the precondition is not met.
-1. Code should be self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
-  1. Good structure (single purpose methods etc)
-  1. Good naming conventions, and don't use single character variable name (except integer counters in loops)
-  1. Clear and concise code (just because you can put everything on a single line doesn't mean you should)
-  1. Use types where they are known - this helps explain what the code does by saying what types it expects/returns (it also helps the IDE provide code insight and autocompletion)
+1. Code documentation
+  1. All code should be self documenting - comments should ideally only be needed to explain _why_ something is done: the code itself says what and how
+    1. Good structure (single purpose methods etc)
+    1. Good naming conventions, and don't use single character variable name (except integer counters in loops)
+    1. Clear and concise code (just because you can put everything on a single line doesn't mean you should)
+    1. Use types where they are known - this helps explain what the code does by saying what types it expects/returns (it also helps the IDE provide code insight and autocompletion)
+    1. It is often helpful to put concise javadoc on public methods briefly explaining the method purpose and what the parameters are for (particularly whether they are required or not)
+  1. Further commenting (i.e. javadoc) should depend largely on the purpose of the code:
+    1. Code intended for release as a public API, where the consumers may not have access to the source, should have extensive and clear comments explaining what it does and why, and possibly how (where the underlying algorithm is relevant, e.g. sort methods)
+    1. Code intended for use just within your development team does not need (as much) javadoc, as long as it is clearly self-documenting (code reviews should help ensure that is the case)
+    1. Other code will fall somewhere between these two, and the amount/type of doco should reflect that
+  1. Apply common sense: if you think your code needs additional documentation, do so
 1. Do not check in commented or dead (unused) code!
 1. Do not copy & paste code: Refactor it into a reusable form.
 1. Do not include implementation details in names - e.g. do not call methods "ajaxSomething" because it may not always be used via ajax; do not call a variable "googleMap" because the implementation might change to another provider (e.g. Leaflet).
@@ -110,6 +117,7 @@ Code reviews are extremely important as they provide a number of benefits to the
   1. how are exceptions handled?
   1. are the correct html attributes being used (e.g. title, not alt, to get a tooltip on a link)?
   1. Are environment specific values like URLs hardcoded?
+  1. Has any documentation (comments & javadoc) been updated to reflect the change?
 1. Review the unit tests
   1. Do they exist? Should they?
   1. Do they sufficiently cover the code being tested?
