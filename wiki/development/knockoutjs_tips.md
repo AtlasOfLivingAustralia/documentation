@@ -1,9 +1,11 @@
-# Hide content until bindings have been processed
+# KnockoutJS Tips and Tricks
 
-## The problem
+## Hide content until bindings have been processed
+
+### The problem
 KnockoutJS, like AngularJS, processes its bindings after the DOM has been loaded. This means that the browser will display the markup prior to KnockoutJS doing its magic, and so you can end up with a screen with partially populated or empty views that 'flashes' before the end result is displayed. AngularJS provides the ng-clock directive to resolve this, but KnockoutJS doesn't seem to have an equivalent.
 
-## The solution
+### The solution
 You can work around this behaviour with the following markup:
 
 ```
