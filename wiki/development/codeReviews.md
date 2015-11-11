@@ -43,7 +43,7 @@ NOTE: These are guidelines - there will be exceptions, but try to follow them wh
     1. Code intended for use just within your development team does not need (as much) javadoc, as long as it is clearly self-documenting (code reviews should help ensure that is the case)
     1. Other code will fall somewhere between these two, and the amount/type of doco should reflect that
   1. Apply common sense: if you think your code needs additional documentation, do so
-1. If you catch and exception, log the stacktrace: just logging the exception's message is not useful when it comes to debugging
+1. If you catch an exception, log the stacktrace: just logging the exception's message is not useful when it comes to debugging
 1. Do not check in commented or dead (unused) code!
 1. Do not copy & paste code: Refactor it into a reusable form.
 1. Do not include implementation details in names - e.g. do not call methods "ajaxSomething" because it may not always be used via ajax; do not call a variable "googleMap" because the implementation might change to another provider (e.g. Leaflet).
