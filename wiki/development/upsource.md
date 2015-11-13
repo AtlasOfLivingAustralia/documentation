@@ -10,6 +10,8 @@ This is currently using the default "Free for 10 users” licence. If we keep it
 
 You can log in using your GitHub account (but you need to hit the little GitHub button instead of the login button).
 
+![GitHub login](../../assets/img/upsource-login-github.jpg)
+
 ## Creating a Review
 1. Log into Upsource with your GitHub user
 1. Find one of the revisions that you want to review (reviews in Upsource are based on individual commits, not Prs)
