@@ -1,12 +1,11 @@
-Documentation for ALA install
-=============
+# Documentation for Living Atlases
 
 This is the documentation project for the [ALA install](https://github.com/AtlasOfLivingAustralia/ala-install). We will priorise topics/areas so they form the basis of the documentation of the ALA project, as well as how to contribute and provide feedback. 
 
-##[View Documentation](https://github.com/AtlasOfLivingAustralia/documentation/wiki)
+## [View Documentation](https://github.com/AtlasOfLivingAustralia/documentation/wiki)
 
 
-####Contributing to the documentation####
+### Contributing to the documentation
 
 We welcome direct contribution to this documentation project. Please announce your interest by posting your github account to the [ALA Portal mailing list](http://lists.gbif.org/mailman/listinfo/ala-portal) and we will grant you the permission to push.
 
